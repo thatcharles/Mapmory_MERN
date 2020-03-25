@@ -17,6 +17,9 @@ import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
+import PostPage from "./views/PostPage/PostPage.js";
+import BlogPage from "./views/BlogPage/BlogPage.js";
+import CreatePage from "./views/BlogPage/Sections/CreatePage.js";
 
 const theme = createMuiTheme({
   palette: {
@@ -58,7 +61,6 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
     <Suspense fallback={(<div>Loading...</div>)}>
-      
         <CssBaseline />
           <NavBar/>
           <Router forceRefresh={!supportHistory}>
@@ -68,6 +70,9 @@ function App() {
                 <Route exact path="/plan" component={Auth(FormPage, null)} />
                 <Route exact path="/login" component={Auth(LoginPage, false)} />
                 <Route exact path="/register" component={Auth(RegisterPage, false)} />
+                <Route exact path="/blog/post/:postId" component={Auth(PostPage, null)} />
+                <Route exact path="/blog" component={Auth(BlogPage, null)} />
+                <Route exact path="/blog/create" component={Auth(CreatePage, null)} />
               </Switch>
             </div>
           </Router>
