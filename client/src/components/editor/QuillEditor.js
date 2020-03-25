@@ -6,7 +6,7 @@ import axios from 'axios';
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false;
 
 // Quill.register('modules/clipboard', PlainClipboard, true);
-/*
+
 const QuillClipboard = Quill.import('modules/clipboard');
 
 class Clipboard extends QuillClipboard {
@@ -62,7 +62,7 @@ class Clipboard extends QuillClipboard {
 
 }
 Quill.register('modules/clipboard', Clipboard, true);
-*/
+
 
 const BlockEmbed = Quill.import('blots/block/embed');
 
@@ -256,6 +256,7 @@ class QuillEditor extends React.Component {
 
         if (e.currentTarget && e.currentTarget.files && e.currentTarget.files.length > 0) {
             const file = e.currentTarget.files[0];
+            console.log(file)
 
             let formData = new FormData();
             const config = {
@@ -270,6 +271,7 @@ class QuillEditor extends React.Component {
                         const quill = this.reactQuillRef.getEditor();
                         quill.focus();
 
+                        // calculate the multi media position
                         let range = quill.getSelection();
                         let position = range ? range.index : 0;
 
@@ -279,6 +281,7 @@ class QuillEditor extends React.Component {
                         quill.setSelection(position + 1);
 
                         if (this._isMounted) {
+                            // ...this.state.file to get the current state value
                             this.setState({
                                 files: [...this.state.files, file]
                             }, () => { this.props.onFilesChange(this.state.files) });
