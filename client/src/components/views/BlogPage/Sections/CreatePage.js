@@ -49,7 +49,7 @@ export default function CreatePage(props) {
 
                     setTimeout(() => {
                         // used for redirect
-                        props.history.push('/blog')
+                        props.history.push('/')
                     }, 2000);
                 }
             })
@@ -70,6 +70,10 @@ export default function CreatePage(props) {
                     placeholder={"Start Posting Something"}
                     onEditorChange={onEditorChange}
                     onFilesChange={onFilesChange}
+                    /** TODO
+                     *  replicate createPage to crate EditPage
+                     *  populate editor with existing content
+                     */
                 />
 
                 <Form onSubmit={onSubmit}>

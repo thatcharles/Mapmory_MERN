@@ -67,7 +67,20 @@ router.get("/getBlogs", (req, res) => {
             if(err) {
                 return res.status(400).send(err)
             }
+            // send result back to client
             res.status(200).json({success:true, blogs})
+        })
+});
+
+router.post("/getPostDetail", (req, res) => {
+
+    Blog.findOne({"_id": req.body.postId})
+        .populate('author')
+        .exec((err, post) => {
+            if(err) {
+                return res.status(400).send(err)
+            }
+            res.status(200).json({success:true, post})
         })
 });
 
