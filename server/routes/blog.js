@@ -42,6 +42,26 @@ router.post("/createPost", (req, res) => {
     });
 });
 
+router.post("/updatePost", (req, res) => {
+
+    Blog.findByIdAndUpdate(req.body._id,
+        {
+            email: req.body.email,
+            content: req.body.content          
+        },  
+        function(err, response){
+                if (err) {
+                    if (err) return res.json({ success: false, err });
+                } else {
+                    return res.status(200).json({
+                        success: true, 
+                        response
+                    });
+                }
+                });
+    
+});
+
 
 router.post("/uploadfiles", (req, res) => {
 

@@ -6,14 +6,38 @@ import { useSelector } from "react-redux";
 import Typography from '@material-ui/core/Typography';
 
 import QuillEditor from '../../../editor/QuillEditor';
+import { FaLongArrowAltDown } from 'react-icons/fa';
 
-export default function CreatePage(props) {
+export default function EditPage(props) {
 
     const user = useSelector(state => state.user)
-    const [content, setContent] = useState("")
+    const [content, setContent] = useState('')
     const [file, setFile] = useState([])
+    
+    // get post id
+    const postId = props.match.params.postId
 
-    //const { Title } = Typography
+    const [post, setPost] = useState([])
+
+    useEffect(() => {
+        const variable = {postId: postId}
+        // variable is the body of the request
+        axios.post('/api/blog/getPostDetail', variable)
+            .then(response => {
+                if (response.data.success) {
+                    // console.log(response.data.post)
+                    // post is in a list
+                    setPost(response.data.post)
+                    if (response.data.post) {
+                        console.log('original content:', response.data.post.content)
+                        setContent(response.data.post.content)
+                        console.log('content:', content)
+                    }
+                } else {
+                    alert('Couldn`t get post detail')
+                }
+            })
+    }, [])
 
     const onFilesChange = (files) => {
         setFile(files)
@@ -21,12 +45,13 @@ export default function CreatePage(props) {
 
     const onEditorChange = (value) => {
         setContent(value)
+        console.log('content on change:', content)
     }
 
     const onSubmit = (event) => {
         event.preventDefault()
 
-        setContent('')
+        //setContent('')
 
         // if user is not logged in
         if (user.userData && !user.userData.isAuth) {
@@ -36,16 +61,17 @@ export default function CreatePage(props) {
         // else push the content into database
         // the variables need to be align with the naming in blogSchema
         const variables = {
+            _id: postId,
             content: content,
             author: user.userData._id
         }
         
         // set up api in Node.js backend in server code.
-        axios.post('/api/blog/createPost', variables)
+        axios.post('/api/blog/updatePost', variables)
             .then(response => {
                 console.log(response)
                 if (response.data.success) {
-                    message.success('Post Created')
+                    message.success('Post Updated')
 
                     setTimeout(() => {
                         // used for redirect
@@ -67,7 +93,7 @@ export default function CreatePage(props) {
                     </Typography>
                 </div>
                 <QuillEditor
-                    placeholder={"Start Posting Something"}
+                    initialValue={content}
                     onEditorChange={onEditorChange}
                     onFilesChange={onFilesChange}
                 />

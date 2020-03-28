@@ -29,7 +29,7 @@ export default function BlogPage() {
                 style={{ width: 370, marginTop: 16 }}
                 actions={[
                     <Icon type="setting" key="setting" />,
-                    <a href={`/blog/create`}><Icon type="edit" key="edit" /></a>,
+                    <a href={`/blog/edit/${blog._id}`}><Icon type="edit" key="edit" /></a>,
                     <a href={`/blog/post/${blog._id}`}> <Icon type="ellipsis" key="ellipsis" /></a>,
                 ]}
             >

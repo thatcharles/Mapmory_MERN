@@ -20,6 +20,7 @@ import Footer from "./views/Footer/Footer"
 import PostPage from "./views/PostPage/PostPage.js";
 import BlogPage from "./views/BlogPage/BlogPage.js";
 import CreatePage from "./views/BlogPage/Sections/CreatePage.js";
+import EditPage from "./views/BlogPage/Sections/EditPage.js";
 
 const theme = createMuiTheme({
   palette: {
@@ -73,6 +74,7 @@ function App() {
                 <Route exact path="/register" component={Auth(RegisterPage, false)} />
                 <Route exact path="/blog/post/:postId" component={Auth(PostPage, null)} /> {/** postId would become a prop sent to PostPage */}
                 <Route exact path="/blog/create" component={Auth(CreatePage, null)} />
+                <Route exact path="/blog/edit/:postId" component={Auth(EditPage, null)} />
               </Switch>
             </div>
           </Router>
