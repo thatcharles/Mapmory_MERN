@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -75,9 +75,11 @@ const steps = ['Destination categories', 'Places to visit', 'Restaurant choice',
 
 export default function Checkout(props) {
   const classes = useStyles();
-  console.log('props.activeStep', props.activeStep)
+
+  console.log(props.step)
+  
   // initialize the starting state
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(props.step || 0);
   const [intervalId, setIntervalId] = React.useState();
   const [step0result, setStep0result] = React.useState();
   const [step1input, setStep1input] = React.useState();
@@ -137,6 +139,7 @@ export default function Checkout(props) {
 }
 
   const getStepContent = (step) => {
+    console.log(step)
     switch (step) {
       case 0:
         return <CategoryForm func = {setStep0result}/>;
@@ -145,7 +148,7 @@ export default function Checkout(props) {
       case 2:
         return <RestaurantForm data = {step3input} func = {setStepRinput} func2 = {setRLunch} func3 = {setRDinner}/>;
       case 3: 
-        return <Review data = {stepRinput} data2 = {step3input} lunch = {RLunch} dinner = {RDinner}/>;
+        return <Review data = {props.sideEditorMap? props.sideEditorMap : stepRinput} data2 = {props.sideEditorData? props.sideEditorData : step3input} lunch = {RLunch} dinner = {RDinner}/>;
         //return <Review data = {stepRinput} data2 = {mock_result} lunch = {RLunch} dinner = {RDinner}/>;
       default:
         throw new Error('Unknown step');
@@ -247,8 +250,11 @@ export default function Checkout(props) {
   const handleNext = () => {
     var handleWelcomeText = props.setWelcomeVisible;
     var setSideEditorVisible = props.setSideEditorVisible;
+    var setSideEditorData = props.setSideEditorData;
+    var setSideEditorMap = props.setSideEditorMap;
     scrollToTop()
     if (activeStep == 0){
+        setSideEditorVisible(false)
         handleWelcomeText(false)
         console.log(step0result)
         let userData = {
@@ -286,10 +292,15 @@ export default function Checkout(props) {
         }).then(data => {
           //console.log(data)
           setStep3input(data)
+          setSideEditorData(data)
         })
     }
     else if (activeStep == 2){
+      setSideEditorMap(stepRinput)
       setSideEditorVisible(true)
+    }
+    else if (activeStep == 3){
+      setSideEditorVisible(false)
     }
 
     setActiveStep(activeStep + 1);

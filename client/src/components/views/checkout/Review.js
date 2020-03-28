@@ -71,7 +71,7 @@ export default function Review(props) {
           props.data2.attraction_groups.map((attraction_group,index) => (
             <div key={index}>
               {props.data2.restaurants.lunch ? (
-                props.data2.restaurants.lunch.after_group_id + 1 == index ? (
+                props.data2.restaurants.lunch.after_group_id + 1 === index ? (
                   <ListItem className={classes.listItem} key={'lunch' + index}>
                     <ListItemText secondary={
                       <React.Fragment>
@@ -91,7 +91,7 @@ export default function Review(props) {
               :(<div></div>)
               }
               {props.data2.restaurants.dinner ? (
-                props.data2.restaurants.dinner.after_group_id + 1 == index ? (
+                props.data2.restaurants.dinner.after_group_id + 1 === index ? (
                   <ListItem className={classes.listItem} key={'dinner' + index}>
                     <ListItemText secondary={
                       <React.Fragment>
