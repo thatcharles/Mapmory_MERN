@@ -62,8 +62,12 @@ if (process.env.NODE_ENV === "production") {
 
 const port = process.env.PORT || 5000
 
-app.listen(port, () => {
-  console.log(`Server Running at ${port}`)
+app.listen(port, '0.0.0.0', (err) => {
+  if (err) {
+    console.log(err);
+  }
+
+  console.info('>>> 🌎 Open http://0.0.0.0:%s/ in your browser.', port);
 });
 
 // sudo ln -s /etc/nginx/sites-available/Mapmory_MERN /etc/nginx/sites-enabled/Mapmory_MERN
