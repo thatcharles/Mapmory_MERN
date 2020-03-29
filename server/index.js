@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // for AWS deployment
-//app.use(express.static(path.join(__dirname, "client/build")))
+app.use(express.static(path.join(__dirname, "client/build")))
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/blog', require('./routes/blog'));
@@ -61,3 +61,5 @@ const port = process.env.PORT || 5000
 app.listen(port, () => {
   console.log(`Server Running at ${port}`)
 });
+
+// sudo ln -s /etc/nginx/sites-available/Mapmory_MERN /etc/nginx/sites-enabled/Mapmory_MERN
