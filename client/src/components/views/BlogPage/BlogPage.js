@@ -17,7 +17,8 @@ export default function BlogPage() {
                     console.log(response.data.blogs)
                     setBlogs(response.data.blogs)
                 } else {
-                    alert('Couldn`t get blog`s lists')
+                    alert('Couldn`t get blog`s lists' )
+                    console.log(response)
                 }
             })
     }, [])
