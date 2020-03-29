@@ -33,6 +33,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// for AWS deployment
+//app.use(express.static(path.join(__dirname, "client/build")))
+
 app.use('/api/users', require('./routes/users'));
 app.use('/api/blog', require('./routes/blog'));
 

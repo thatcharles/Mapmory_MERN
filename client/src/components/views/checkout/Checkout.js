@@ -91,53 +91,6 @@ export default function Checkout(props) {
   const [timeList, setTimeList] = React.useState(new Map());
   const [departureTime, setDepartureTime] = React.useState('07:30');
 
-  const mock_result = 
-  {
-    "current_location": {
-        "latitude": 34.05874,
-        "longitude": -118.380398
-        },
-    "attraction_groups": [
-        {
-            "parking_lot": {
-                "name": "Auto-Vault",
-                "location": {
-                    "latitude": 34.07027,
-                    "longitude": -118.4035
-                }
-            },
-            "attractions": [
-                {
-                    "name": "Glitterati Tours",
-                    "category": "zoos tour",
-                    "location":{
-                        "latitude": 34.0734596252441, 
-                        "longitude": -118.400321960449
-                    },
-                    "estimate_time": 30,
-                    "rating": 5
-                },
-                {
-                    "name": "Two Rodeo Drive",
-                    "category": "shopping",
-                    "location":{
-                        "latitude": 34.067978278035, 
-                        "longitude": -118.401123331646
-                    },
-                    "estimate_time": 30,
-                    "rating": 3.5
-                }
-            ],
-            "travel_times": {
-                "estimate_start_time": "7:41",
-                "estimate_end_time": "9:1"
-            }
-        }
-    ],
-    "restaurants": {},
-    "restaurant_categories": []
-}
-
   const getStepContent = (step) => {
     console.log(step)
     switch (step) {
