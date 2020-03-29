@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 // for AWS deployment
-app.use(express.static(path.join(__dirname, "client/build")))
+//app.use(express.static(path.join(__dirname, "client/build")))
 /*
 app.use(express.static("client/build"));
 
