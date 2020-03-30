@@ -15,6 +15,8 @@ import ReduxThunk from 'redux-thunk';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
+document.body.style.zoom = (window.innerWidth * 0.8 / window.outerWidth * 0.9)
+
 ReactDOM.render(
     <Provider
         store={createStoreWithMiddleware(

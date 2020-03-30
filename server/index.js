@@ -11,10 +11,7 @@ const config = require('./config/key')
 
 const mongoose = require('mongoose')
 
-console.log('###process.env: ', process.env)
-console.log('###process.env.NODE_ENV: ', process.env.NODE_ENV)
-console.log('###process.env.MONGODB_URI: ', process.env.MONGODB_URI)
-const connect = mongoose.connect(process.env.MONGODB_URI,
+const connect = mongoose.connect(process.env.MONGODB_URI || config.mongoURI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
