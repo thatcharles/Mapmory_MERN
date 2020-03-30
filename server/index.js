@@ -11,7 +11,9 @@ const config = require('./config/key')
 
 const mongoose = require('mongoose')
 
-const connect = mongoose.connect(process.env.MONGODB_URI || config.mongoURI,
+const mongoURI = 'mongodb+srv://admin-001:admin@cluster0-ydvgx.mongodb.net/test?retryWrites=true&w=majority'
+
+const connect = mongoose.connect(process.env.MONGODB_URI || mongoURI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -39,6 +41,18 @@ app.use('/api/blog', require('./routes/blog'))
 app.use('/uploads', express.static('uploads'))
 
 // Serve static assets if in production
+
+/***************************************
+ * Comment out when editing locally
+ ***************************************/
+app.use(express.static('client/build'))
+
+// index.html for all page routes
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'))
+})
+/****************************************/
+
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static('client/build'))
