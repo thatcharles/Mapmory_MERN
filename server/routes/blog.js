@@ -6,6 +6,10 @@ const { auth } = require("../middleware/auth");
 // To upload multimedia content
 const multer = require("multer");
 
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 // STORAGE MULTER CONFIG
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
