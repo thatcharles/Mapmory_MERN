@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const cors = require('cors')
+require('dotenv').config()
 
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -16,7 +17,7 @@ const connect = mongoose.connect(config.mongoURI,
     useCreateIndex: true,
     useFindAndModify: false
   })
-  .then(() => console.log('MongoDB Connected...'))
+  .then(() => console.log('MongoDB Connected Successfully...'))
   .catch(err => console.log(err))
 
 app.use(cors())
