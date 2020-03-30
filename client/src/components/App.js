@@ -67,14 +67,13 @@ function App() {
           <Router forceRefresh={!supportHistory}>
             <div className='container'>
               <Switch>
-                {/*<Route exact path="/" component={Auth(LandingPage, null)} />*/}
-                <Route exact path="/" component={Auth(BlogPage, null)} />
-                <Route exact path="/plan" component={Auth(FormPage, null)} />
+                <Route exact path="/" component={Auth(BlogPage, true)} />
+                <Route exact path="/plan" component={Auth(FormPage, true)} />
                 <Route exact path="/login" component={Auth(LoginPage, false)} />
                 <Route exact path="/register" component={Auth(RegisterPage, false)} />
-                <Route exact path="/blog/post/:postId" component={Auth(PostPage, null)} /> {/** postId would become a prop sent to PostPage */}
-                <Route exact path="/blog/create" component={Auth(CreatePage, null)} />
-                <Route exact path="/blog/edit/:postId" component={Auth(EditPage, null)} />
+                <Route exact path="/blog/post/:postId" component={Auth(PostPage, true)} /> {/** postId would become a prop sent to PostPage */}
+                <Route exact path="/blog/create" component={Auth(CreatePage, true)} />
+                <Route exact path="/blog/edit/:postId" component={Auth(EditPage, true)} />
               </Switch>
             </div>
           </Router>
