@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser')
 const config = require('./config/key')
 
 const mongoose = require('mongoose')
+
+console.log('config.mongoURI: ', config.mongoURI)
 const connect = mongoose.connect(config.mongoURI,
   {
     useNewUrlParser: true,
