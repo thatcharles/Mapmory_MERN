@@ -32,6 +32,11 @@ const userSchema = mongoose.Schema({
     },
     tokenExp :{
         type: Number
+    },
+    description: { //0507
+        type: String,
+        default: '',
+        maxlength: 150
     }
 })
 
