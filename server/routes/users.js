@@ -20,6 +20,7 @@ router.get("/auth", auth, (req, res) => {
         image: req.user.image,
         // 0507
         description: req.user.description,
+        location: req.user.location,
     });
 });
 
@@ -67,6 +68,47 @@ router.get("/logout", auth, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { token: "", tokenExp: "" }, (err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).send({
+            success: true
+        });
+    });
+});
+
+router.post("/update", auth, async (req, res) => {
+    /**
+     * The result hs to be updated 2 times to reflect.
+     * Currently call the findOneAndUpdate twice, fix it later
+     */
+    let doc = await User.findOneAndUpdate({ _id: req.user._id }, { 
+        name: req.body.name,
+        lastname: req.body.lastname,
+        description: req.body.description,
+        location: req.body.location,
+     })
+
+     console.log('1st doc', doc)
+
+    User.findOneAndUpdate({ _id: req.user._id }, { 
+        name: req.body.name,
+        lastname: req.body.lastname,
+        description: req.body.description,
+        location: req.body.location,
+     }, (err, doc) => {
+        if (err) {
+            return res.json({ success: false, err });
+        }
+        // console.log('update success')
+        // console.log('doc', doc)
+        return res.status(200).json({
+            _id: req.user._id,
+            isAdmin: req.user.role === 0 ? false : true,
+            isAuth: true,
+            email: req.user.email,
+            name: doc.name,
+            lastname: doc.lastname,
+            role: req.user.role,
+            image: req.user.image,
+            description: doc.description,
+            location: doc.location,
             success: true
         });
     });

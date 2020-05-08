@@ -37,7 +37,12 @@ const userSchema = mongoose.Schema({
         type: String,
         default: '',
         maxlength: 150
-    }
+    },
+    location: {
+        type: String,
+        default: '',
+        maxlength: 50
+    },
 })
 
 
