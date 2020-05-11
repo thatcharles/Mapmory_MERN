@@ -36,7 +36,7 @@ const upload = multer({ storage: storage }).single("file");
 router.post("/createPost", (req, res) => {
 
     const post = new Post(req.body);
-    
+
     post.save((err, postInfo) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).json({
@@ -44,6 +44,19 @@ router.post("/createPost", (req, res) => {
             postInfo
         });
     });
+});
+
+router.get("/getPosts", (req, res) => {
+    // populate user detail information from id
+    Post.find()
+        .populate('author')
+        .exec((err, posts) => {
+            if(err) {
+                return res.status(400).send(err)
+            }
+            // send result back to client
+            res.status(200).json({success:true, posts})
+        })
 });
 
 module.exports = router;

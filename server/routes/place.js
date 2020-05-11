@@ -46,4 +46,20 @@ router.post("/createPlace", (req, res) => {
     });
 });
 
+router.post("/getPlacesByPost", (req, res) => {
+
+    Place.find({ postId: req.body.postId})
+         .populate('postId')
+         .exec((err, places) => {
+                if (err) return res.json({ success: false, err });
+                return res.status(200).json({
+                    success: true, 
+                    places
+                }
+            )
+    });
+});
+
+
+
 module.exports = router;
