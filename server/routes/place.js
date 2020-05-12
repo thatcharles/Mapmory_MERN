@@ -49,6 +49,7 @@ router.post("/createPlace", (req, res) => {
 router.post("/getPlacesByPost", (req, res) => {
 
     Place.find({ postId: req.body.postId})
+         .sort('order')
          .populate('postId')
          .exec((err, places) => {
                 if (err) return res.json({ success: false, err });
@@ -58,6 +59,18 @@ router.post("/getPlacesByPost", (req, res) => {
                 }
             )
     });
+});
+
+router.get("/getPlaces", (req, res) => {
+    // select only a subset of attributes to return
+    Place.find({},'order name body coords image postId')
+        .exec((err, places) => {
+            if(err) {
+                return res.status(400).send(err)
+            }
+            // send result back to client
+            res.status(200).json({success:true, places})
+        })
 });
 
 

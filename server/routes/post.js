@@ -49,6 +49,7 @@ router.post("/createPost", (req, res) => {
 router.get("/getPosts", (req, res) => {
     // populate user detail information from id
     Post.find()
+        .limit(15)
         .populate('author')
         .exec((err, posts) => {
             if(err) {
